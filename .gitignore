@@ -67,3 +67,6 @@ coverage.xml
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Nvim log, etc
+*.log

@@ -45,13 +45,36 @@ The repository includes a modern, Python-focused Neovim starter configuration in
 
 ### Installation
 
-To use this configuration, link the directory to your system's Neovim configuration directory:
+To use this configuration, run the following commands from the repository root.
+
+If `~/.config/nvim` does not exist, create the parent configuration directory and
+link this repository's Neovim configuration:
 
 ```sh
-ln -s /path/to/dotfiles/daily/.config/nvim ~/.config/nvim
+mkdir -p ~/.config
+ln -s "$(pwd)/daily/.config/nvim" ~/.config/nvim
 ```
 
-Upon launching Neovim, `lazy.nvim` will automatically bootstrap and install the configured plugins.
+The `mkdir -p` command is safe whether or not `~/.config` already exists.
+
+If `~/.config/nvim` already exists, preserve it before creating the link:
+
+```sh
+mv ~/.config/nvim ~/.config/nvim.backup
+ln -s "$(pwd)/daily/.config/nvim" ~/.config/nvim
+```
+
+Choose a different backup name if `~/.config/nvim.backup` already exists. This
+applies whether the existing `nvim` path is a directory or a symbolic link.
+
+Launch Neovim after installation:
+
+```sh
+nvim
+```
+
+On the first launch, `lazy.nvim` will automatically bootstrap and install the
+configured plugins.
 
 ### Features
 
@@ -79,3 +102,4 @@ python3 -m py_compile daily/*.py
 ```
 
 See [AGENTS.md](AGENTS.md) for repository structure, coding conventions, testing expectations, and contribution guidelines.
+~~~~
