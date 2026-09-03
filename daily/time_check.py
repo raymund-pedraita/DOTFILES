@@ -83,6 +83,9 @@ def calc(hour: int, minutes: int, away_duration: timedelta) -> None:
     print("")
     print(f"Time Now: {time_now.time()}")
 
+    work_duration = time_now - time_in - away_duration
+    print(f"Work Duration: {to_hm(work_duration)}")
+
     remain = time_out - time_now
     print(f"Time Left: {to_hm(remain)}")
 
