@@ -27,11 +27,7 @@ def to_hm(td: timedelta) -> str:
 
 
 def parse_clock(value: str) -> time:
-    if (
-        len(value) != 5
-        or value[2] != ":"
-        or not (value[:2] + value[3:]).isdigit()
-    ):
+    if len(value) != 5 or value[2] != ":" or not (value[:2] + value[3:]).isdigit():
         raise ValueError
 
     return datetime.strptime(value, "%H:%M").time()
@@ -80,12 +76,15 @@ def calc(hour: int, minutes: int, away_duration: timedelta) -> None:
     time_out = time_in + timedelta(hours=8, minutes=47) + away_duration
     time_now = datetime.now()
 
-    print(f"Time In: {time_in.time()}")
+    print(f"Punch In: {time_in.time()}")
     if away_duration:
-        print(f"Time Out of Office: {to_hm(away_duration)}")
-    print(f"Time Out by: {time_out.time()}")
+        print(f"Time Away from Office: {to_hm(away_duration)}")
+    print(f"Punch Out by: {time_out.time()}")
     print("")
     print(f"Time Now: {time_now.time()}")
+
+    work_duration = time_now - time_in - away_duration
+    print(f"Work Duration: {to_hm(work_duration)}")
 
     remain = time_out - time_now
     print(f"Time Left: {to_hm(remain)}")
